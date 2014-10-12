@@ -1,0 +1,51 @@
+.mango-agenda .mg-title-left{
+    float: left;
+    cursor: pointer;
+}
+.mango-agenda .mg-title{
+    text-align: center;
+}
+.mango-agenda .mg-title-right{
+    float: right;
+    cursor: pointer;
+}
+
+.mango-agenda .mg-table{
+    width:100%;
+}
+.mango-agenda .mg-table-header{
+    padding-left: 5px;
+    padding-right: 5px;
+    border: solid 1px #d3d3d3;
+    font-size: smaller;
+}
+.mango-agenda .mg-table-header-day.is-other-month{
+    color: #e0e0e0;
+}
+.mango-agenda .mg-item:nth-child(2) {
+    background-color: aliceblue;
+}
+
+.mango-agenda .mg-item-body {
+    margin: 2px;
+}
+
+.mango-agenda .mg-item-img > img{
+    width: 50px;
+}
+
+.mango-agenda .mg-item-name {
+    padding: 10px;
+}
+
+.mango-agenda .mg-item-day{
+    border-right: solid 1px #e0e0e0;
+}
+
+.mango-agenda .mg-item-day.is-we{
+    background-color: #f5f5f5 ;
+}
+
+.mango-agenda .mg-item-day.is-today{
+    border-right: solid 1px coral;
+}
