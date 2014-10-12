@@ -1,0 +1,25 @@
+{
+  "name": "angular-mt-agenda",
+  "main": "angular-mt-agenda.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/MangoTools/angular-mt-agenda",
+  "authors": [
+    "adidoo <adrien@mango.tools>"
+  ],
+  "description": "angular agenda",
+  "keywords": [
+    "agenda",
+    "mango.tools"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.26"
+  }
+}

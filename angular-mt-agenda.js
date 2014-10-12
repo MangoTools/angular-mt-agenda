@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mango.agenda', [])
-    .directive('mangoAgenda', [ function() {
+angular.module('angular.mt.agenda', [])
+    .directive('mtAgenda', [ function() {
         return {
             restrict: 'AE',
             scope: {
@@ -10,7 +10,7 @@ angular.module('mango.agenda', [])
             },
             replace: true,
             template:
-            '<div class="mango-agenda">' +
+            '<div class="angular-mt-agenda">' +
             '   <div class="mg-header">' +
             '       <h2 class="mg-title-left"><a class="previews-month" ng-click="gotoPreviewsMonth($event)">&laquo; </a></h2>' +
             '       <h2 class="mg-title-right"><a class="next-month" ng-click="gotoNextMonth($event)"> &raquo;</a></h2>' +
