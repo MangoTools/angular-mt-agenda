@@ -27,8 +27,8 @@ angular.module('angular.mt.agenda', [])
             '           </thead>' +
             '           <tbody>' +
             '               <tr ng-repeat="item in ngModel" class="mg-item" ng-class="">' +
-            '                   <td class="mg-item-img"><img ng-src="{{item.imgUrl}}"></td>' +
-            '                   <td class="mg-item-name">{{item.name}}</td>' +
+            '                   <td class="mg-item-img"><a ng-href="{{item.editUrl}}"><img ng-src="{{item.imgUrl}}"></a></td>' +
+            '                   <td class="mg-item-name"><a ng-href="{{item.editUrl}}">{{item.name}}</a></td>' +
             '                   <td ng-repeat="day in calendar.days" class="mg-item-day" ng-class="day.class"> </td>' +
             '               </tr>' +
             '           </tbody>' +

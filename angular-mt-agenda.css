@@ -22,15 +22,24 @@
 .angular-mt-agenda .mg-table-header-day.is-other-month{
     color: #e0e0e0;
 }
-.angular-mt-agenda .mg-item:nth-child(2) {
+.angular-mt-agenda .mg-item:nth-child(even) {
     background-color: aliceblue;
+}
+
+.angular-mt-agenda .mg-item:hover {
+    background-color: lightyellow;
+}
+
+.angular-mt-agenda .mg-table-header-day:hover {
+    background-color: lightyellow;
+    cursor:default;
 }
 
 .angular-mt-agenda .mg-item-body {
     margin: 2px;
 }
 
-.angular-mt-agenda .mg-item-img > img{
+.angular-mt-agenda .mg-item-img img{
     width: 50px;
 }
 
@@ -38,12 +47,23 @@
     padding: 10px;
 }
 
+.angular-mt-agenda a{
+    cursor: pointer;
+}
+
 .angular-mt-agenda .mg-item-day{
     border-right: solid 1px #e0e0e0;
 }
 
+.angular-mt-agenda .mg-item:first-child{
+    border-left: solid 1px #e0e0e0;
+}
 .angular-mt-agenda .mg-item-day.is-we{
     background-color: #f5f5f5 ;
+}
+
+.angular-mt-agenda .mg-item:hover .mg-item-day.is-we{
+    background-color: lightgoldenrodyellow ;
 }
 
 .angular-mt-agenda .mg-item-day.is-today{
