@@ -21,12 +21,12 @@ angular.module('angular.mt.agenda', [])
             '           <thead>' +
             '               <tr>' +
             '                   <th class="mg-table-header mg-table-header-picture">Picture</th>' +
-            '                   <th class="mg-table-header mg-table-header-name">Name</th>' +
+            '                   <th class="mg-table-header mg-table-header-name"><a ng-click="predicate = \'name\'; reverse=!reverse">Name <i class="fa pull-right" ng-class="{\'fa-angle-up\': !reverse, \'fa-angle-down\': reverse}"></i></a></th>' +
             '                   <th ng-repeat="day in calendar.days" class="mg-table-header mg-table-header-day" ng-class="day.class">{{day.date.date()}}</th>' +
             '               </tr>' +
             '           </thead>' +
             '           <tbody>' +
-            '               <tr ng-repeat="item in ngModel" class="mg-item" ng-class="">' +
+            '               <tr ng-repeat="item in ngModel | orderBy:predicate:reverse" class="mg-item" ng-class="">' +
             '                   <td class="mg-item-img"><a ng-href="{{item.editUrl}}"><img ng-src="{{item.imgUrl}}"></a></td>' +
             '                   <td class="mg-item-name"><a ng-href="{{item.editUrl}}">{{item.name}}</a></td>' +
             '                   <td ng-repeat="day in calendar.days" class="mg-item-day" ng-class="day.class"> </td>' +
@@ -48,6 +48,9 @@ angular.module('angular.mt.agenda', [])
 
                 $scope.now = moment.utc();
                 $scope.base = moment.utc({y:$scope.now.year(), M:$scope.now.month(), d:1});
+
+                $scope.predicate = 'name';
+                $scope.reverse = false;
 
                 $scope.$watch('base | json', function(){
                     updateTable($scope.base);
