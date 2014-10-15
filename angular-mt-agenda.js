@@ -27,8 +27,8 @@ angular.module('angular.mt.agenda', [])
             '           </thead>' +
             '           <tbody>' +
             '               <tr ng-repeat="item in ngModel | orderBy:predicate:reverse" class="mg-item" ng-class="">' +
-            '                   <td class="mg-item-img"><a ng-href="{{item.editUrl}}"><img ng-src="{{item.imgUrl}}"></a></td>' +
-            '                   <td class="mg-item-name"><a ng-href="{{item.editUrl}}">{{item.name}}</a></td>' +
+            '                   <td class="mg-item-img" ng-click="goToUrl(item.editUrl)"><img ng-src="{{item.imgUrl}}"></td>' +
+            '                   <td class="mg-item-name" ng-click="goToUrl(item.editUrl)"">{{item.name}}</td>' +
             '                   <td ng-repeat="day in calendar.days" class="mg-item-day" ng-class="day.class"> </td>' +
             '               </tr>' +
             '           </tbody>' +
@@ -39,7 +39,7 @@ angular.module('angular.mt.agenda', [])
             link: function postLink(scope, element) {
                 $(element).disableSelection();
             },
-            controller: function($scope, $element) {
+            controller: function($scope, $element, $location) {
 
                 $scope.config = $scope.config || {};
                 $scope.config.firstDayOfWeek = $scope.config.firstDayOfWeek || 6;
@@ -51,6 +51,10 @@ angular.module('angular.mt.agenda', [])
 
                 $scope.predicate = 'name';
                 $scope.reverse = false;
+
+                $scope.goToUrl = function(url){
+                    $location.path(url);
+                };
 
                 $scope.$watch('base | json', function(){
                     updateTable($scope.base);

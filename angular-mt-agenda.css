@@ -1,3 +1,7 @@
+.angular-mt-agenda [ng-click] {
+    cursor: pointer;
+}
+
 .angular-mt-agenda .mg-title-left{
     float: left;
     cursor: pointer;
