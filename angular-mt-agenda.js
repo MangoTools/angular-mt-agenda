@@ -21,7 +21,7 @@ angular.module('angular.mt.agenda', [])
             '           <thead>' +
             '               <tr>' +
             '                   <th class="mg-table-header mg-table-header-picture">Picture</th>' +
-            '                   <th class="mg-table-header mg-table-header-name"><a ng-click="predicate = \'name\'; reverse=!reverse">Name <i class="fa pull-right" ng-class="{\'fa-angle-up\': !reverse, \'fa-angle-down\': reverse}"></i></a></th>' +
+            '                   <th class="mg-table-header mg-table-header-name" ng-click="predicate = \'name\'; reverse=!reverse">Name <i class="fa pull-right" ng-class="{\'fa-angle-up\': !reverse, \'fa-angle-down\': reverse}"></i></th>' +
             '                   <th ng-repeat="day in calendar.days" class="mg-table-header mg-table-header-day" ng-class="day.class">{{day.date.date()}}</th>' +
             '               </tr>' +
             '           </thead>' +
