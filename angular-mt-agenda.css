@@ -73,3 +73,11 @@
 .angular-mt-agenda .mg-item-day.is-today{
     border-right: solid 1px coral;
 }
+
+
+.angular-mt-agenda .mg-item.selected{
+    background-color: #86C4ED;
+}
+.angular-mt-agenda .mg-item.selected .mg-item-day.is-we{
+    background-color: #B4DDF8;
+}

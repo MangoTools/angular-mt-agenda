@@ -6,7 +6,8 @@ angular.module('angular.mt.agenda', [])
             restrict: 'AE',
             scope: {
                 ngModel:'=',
-                config: '='
+                config: '=',
+                selected: '='
             },
             replace: true,
             template:
@@ -26,9 +27,9 @@ angular.module('angular.mt.agenda', [])
             '               </tr>' +
             '           </thead>' +
             '           <tbody>' +
-            '               <tr ng-repeat="item in ngModel | orderBy:predicate:reverse" class="mg-item" ng-class="">' +
-            '                   <td class="mg-item-img" ng-click="goToUrl(item.editUrl)"><img ng-src="{{item.imgUrl}}"></td>' +
-            '                   <td class="mg-item-name" ng-click="goToUrl(item.editUrl)"">{{item.name}}</td>' +
+            '               <tr ng-repeat="item in ngModel | orderBy:predicate:reverse" class="mg-item" ng-class="{selected: item.selected}">' +
+            '                   <td class="mg-item-img" ng-click="select(item)"><img ng-src="{{item.imgUrl}}"></td>' +
+            '                   <td class="mg-item-name" ng-click="select(item)"">{{item.name}}</td>' +
             '                   <td ng-repeat="day in calendar.days" class="mg-item-day" ng-class="day.class"> </td>' +
             '               </tr>' +
             '           </tbody>' +
@@ -51,6 +52,19 @@ angular.module('angular.mt.agenda', [])
 
                 $scope.predicate = 'name';
                 $scope.reverse = false;
+
+                $scope.select = function(item){
+                    if($scope.selected!==null){
+                        $scope.selected.selected = false;
+                    }
+                    if($scope.selected !== item){
+                        $scope.selected = item;
+                        $scope.selected.selected = true;
+                    }
+                    else{
+                        $scope.selected = null;
+                    }
+                };
 
                 $scope.goToUrl = function(url){
                     $location.path(url);
@@ -106,7 +120,7 @@ angular.module('angular.mt.agenda', [])
                         day.class['is-we'] = (i.day()===6 || i.day()===0);
                         day.class['is-today'] = (i.isSame($scope.now, 'd'));
                         day.class['is-other-month'] = (i.isBefore(firstMonthDay) || i.isAfter(lastMonthDay));
-
+                        day.class['selectable'] = (i.isBefore(firstMonthDay) || i.isAfter(lastMonthDay));
                         $scope.calendar.days.push(day);
                     }
 
