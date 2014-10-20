@@ -1,4 +1,7 @@
 angular-mt-agenda
 =================
 
-Agenda with angular
+Agenda directive for angular
+
+
+[the Mango Tools Team](http://mango.tools)
