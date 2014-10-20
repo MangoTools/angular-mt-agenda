@@ -11,7 +11,7 @@ angular.module('angular.mt.agenda', [])
             },
             replace: true,
             template:
-            '<div class="angular-mt-agenda">' +
+            '<div class="mt-agenda">' +
             '   <div class="mg-header">' +
             '       <h2 class="mg-title-left"><a class="previews-month" ng-click="gotoPreviewsMonth($event)">&laquo; </a></h2>' +
             '       <h2 class="mg-title-right"><a class="next-month" ng-click="gotoNextMonth($event)"> &raquo;</a></h2>' +

@@ -1,83 +1,87 @@
-.angular-mt-agenda [ng-click] {
+.mt-agenda [ng-click] {
     cursor: pointer;
 }
 
-.angular-mt-agenda .mg-title-left{
+.mt-agenda .mg-body {
+    overflow-y: auto;
+}
+
+.mt-agenda .mg-title-left{
     float: left;
     cursor: pointer;
 }
-.angular-mt-agenda .mg-title{
+.mt-agenda .mg-title{
     text-align: center;
 }
-.angular-mt-agenda .mg-title-right{
+.mt-agenda .mg-title-right{
     float: right;
     cursor: pointer;
 }
 
-.angular-mt-agenda .mg-table{
+.mt-agenda .mg-table{
     width:100%;
 }
-.angular-mt-agenda .mg-table-header{
+.mt-agenda .mg-table-header{
     padding-left: 5px;
     padding-right: 5px;
     border: solid 1px #d3d3d3;
     font-size: smaller;
 }
-.angular-mt-agenda .mg-table-header-day.is-other-month{
+.mt-agenda .mg-table-header-day.is-other-month{
     color: #e0e0e0;
 }
-.angular-mt-agenda .mg-item:nth-child(even) {
+.mt-agenda .mg-item:nth-child(even) {
     background-color: aliceblue;
 }
 
-.angular-mt-agenda .mg-item:hover {
+.mt-agenda .mg-item:hover {
     background-color: lightyellow;
 }
 
-.angular-mt-agenda .mg-table-header-day:hover {
+.mt-agenda .mg-table-header-day:hover {
     background-color: lightyellow;
     cursor:default;
 }
 
-.angular-mt-agenda .mg-item-body {
+.mt-agenda .mg-item-body {
     margin: 2px;
 }
 
-.angular-mt-agenda .mg-item-img img{
+.mt-agenda .mg-item-img img{
     width: 50px;
 }
 
-.angular-mt-agenda .mg-item-name {
+.mt-agenda .mg-item-name {
     padding: 10px;
 }
 
-.angular-mt-agenda a{
+.mt-agenda a{
     cursor: pointer;
 }
 
-.angular-mt-agenda .mg-item-day{
+.mt-agenda .mg-item-day{
     border-right: solid 1px #e0e0e0;
 }
 
-.angular-mt-agenda .mg-item:first-child{
+.mt-agenda .mg-item:first-child{
     border-left: solid 1px #e0e0e0;
 }
-.angular-mt-agenda .mg-item-day.is-we{
+.mt-agenda .mg-item-day.is-we{
     background-color: #f5f5f5 ;
 }
 
-.angular-mt-agenda .mg-item:hover .mg-item-day.is-we{
+.mt-agenda .mg-item:hover .mg-item-day.is-we{
     background-color: lightgoldenrodyellow ;
 }
 
-.angular-mt-agenda .mg-item-day.is-today{
+.mt-agenda .mg-item-day.is-today{
     border-right: solid 1px coral;
 }
 
 
-.angular-mt-agenda .mg-item.selected{
+.mt-agenda .mg-item.selected{
     background-color: #86C4ED;
 }
-.angular-mt-agenda .mg-item.selected .mg-item-day.is-we{
+.mt-agenda .mg-item.selected .mg-item-day.is-we{
     background-color: #B4DDF8;
 }
