@@ -2,56 +2,56 @@
     cursor: pointer;
 }
 
-.mt-agenda .mg-body {
+.mt-agenda .mt-body {
     overflow-y: auto;
 }
 
-.mt-agenda .mg-title-left{
+.mt-agenda .mt-title-left{
     float: left;
     cursor: pointer;
 }
-.mt-agenda .mg-title{
+.mt-agenda .mt-title{
     text-align: center;
 }
-.mt-agenda .mg-title-right{
+.mt-agenda .mt-title-right{
     float: right;
     cursor: pointer;
 }
 
-.mt-agenda .mg-table{
+.mt-agenda .mt-table{
     width:100%;
 }
-.mt-agenda .mg-table-header{
+.mt-agenda .mt-table-header{
     padding-left: 5px;
     padding-right: 5px;
     border: solid 1px #d3d3d3;
     font-size: smaller;
 }
-.mt-agenda .mg-table-header-day.is-other-month{
+.mt-agenda .mt-table-header-day.is-other-month{
     color: #e0e0e0;
 }
-.mt-agenda .mg-item:nth-child(even) {
+.mt-agenda .mt-item:nth-child(even) {
     background-color: aliceblue;
 }
 
-.mt-agenda .mg-item:hover {
+.mt-agenda .mt-item:hover {
     background-color: lightyellow;
 }
 
-.mt-agenda .mg-table-header-day:hover {
+.mt-agenda .mt-table-header-day:hover {
     background-color: lightyellow;
     cursor:default;
 }
 
-.mt-agenda .mg-item-body {
+.mt-agenda .mt-item-body {
     margin: 2px;
 }
 
-.mt-agenda .mg-item-img img{
+.mt-agenda .mt-item-img img{
     width: 50px;
 }
 
-.mt-agenda .mg-item-name {
+.mt-agenda .mt-item-name {
     padding: 10px;
 }
 
@@ -59,29 +59,29 @@
     cursor: pointer;
 }
 
-.mt-agenda .mg-item-day{
+.mt-agenda .mt-item-day{
     border-right: solid 1px #e0e0e0;
 }
 
-.mt-agenda .mg-item:first-child{
+.mt-agenda .mt-item:first-child{
     border-left: solid 1px #e0e0e0;
 }
-.mt-agenda .mg-item-day.is-we{
+.mt-agenda .mt-item-day.is-we{
     background-color: #f5f5f5 ;
 }
 
-.mt-agenda .mg-item:hover .mg-item-day.is-we{
+.mt-agenda .mt-item:hover .mt-item-day.is-we{
     background-color: lightgoldenrodyellow ;
 }
 
-.mt-agenda .mg-item-day.is-today{
+.mt-agenda .mt-item-day.is-today{
     border-right: solid 1px coral;
 }
 
 
-.mt-agenda .mg-item.selected{
+.mt-agenda .mt-item.selected{
     background-color: #86C4ED;
 }
-.mt-agenda .mg-item.selected .mg-item-day.is-we{
+.mt-agenda .mt-item.selected .mt-item-day.is-we{
     background-color: #B4DDF8;
 }

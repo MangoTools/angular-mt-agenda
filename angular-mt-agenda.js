@@ -7,30 +7,30 @@ angular.module('angular.mt.agenda', [])
             scope: {
                 ngModel:'=',
                 config: '=',
-                selected: '='
+                selectedLine: '='
             },
             replace: true,
             template:
             '<div class="mt-agenda">' +
-            '   <div class="mg-header">' +
-            '       <h2 class="mg-title-left"><a class="previews-month" ng-click="gotoPreviewsMonth($event)">&laquo; </a></h2>' +
-            '       <h2 class="mg-title-right"><a class="next-month" ng-click="gotoNextMonth($event)"> &raquo;</a></h2>' +
-            '       <div class="mg-title"><h2>{{base.format(\'MMMM YYYY\')}}</h2></div>' +
+            '   <div class="mt-header">' +
+            '       <h2 class="mt-title-left"><a class="previews-month" ng-click="gotoPreviewsMonth($event)">&laquo; </a></h2>' +
+            '       <h2 class="mt-title-right"><a class="next-month" ng-click="gotoNextMonth($event)"> &raquo;</a></h2>' +
+            '       <div class="mt-title"><h2>{{base.format(\'MMMM YYYY\')}}</h2></div>' +
             '   </div>' +
-            '   <div class="mg-body">' +
-            '       <table class="mg-table" ng-style="{{tableStyle}}">' +
+            '   <div class="mt-body">' +
+            '       <table class="mt-table" ng-style="{{tableStyle}}">' +
             '           <thead>' +
             '               <tr>' +
-            '                   <th class="mg-table-header mg-table-header-picture">Picture</th>' +
-            '                   <th class="mg-table-header mg-table-header-name" ng-click="predicate = \'name\'; reverse=!reverse">Name <i class="fa pull-right" ng-class="{\'fa-angle-up\': !reverse, \'fa-angle-down\': reverse}"></i></th>' +
-            '                   <th ng-repeat="day in calendar.days" class="mg-table-header mg-table-header-day" ng-class="day.class">{{day.date.date()}}</th>' +
+            '                   <th class="mt-table-header mt-table-header-picture">Picture</th>' +
+            '                   <th class="mt-table-header mt-table-header-name" ng-click="predicate = \'data.name\'; reverse=!reverse">Name <i class="fa pull-right" ng-class="{\'fa-angle-up\': !reverse, \'fa-angle-down\': reverse}"></i></th>' +
+            '                   <th ng-repeat="day in calendar.days" class="mt-table-header mt-table-header-day" ng-class="day.class">{{day.date | amDateFormat:\'DD\'}}</th>' +
             '               </tr>' +
             '           </thead>' +
             '           <tbody>' +
-            '               <tr ng-repeat="item in ngModel | orderBy:predicate:reverse" class="mg-item" ng-class="{selected: item.selected}">' +
-            '                   <td class="mg-item-img" ng-click="select(item)"><img ng-src="{{item.imgUrl}}"></td>' +
-            '                   <td class="mg-item-name" ng-click="select(item)"">{{item.name}}</td>' +
-            '                   <td ng-repeat="day in calendar.days" class="mg-item-day" ng-class="day.class"> </td>' +
+            '               <tr ng-repeat="item in calendar.items | orderBy:predicate:reverse" class="mt-item" ng-class="{selected: item.data.selected}">' +
+            '                   <td class="mt-item-img" ng-click="selectLine(item.data)"><img ng-src="{{item.data.imgUrl}}"></td>' +
+            '                   <td class="mt-item-name" ng-click="selectLine(item.data)"">{{item.data.name}}</td>' +
+            '                   <td ng-repeat="day in item.days" class="mt-item-day" ng-class="day.class"> </td>' +
             '               </tr>' +
             '           </tbody>' +
             '       </table>' +
@@ -50,19 +50,19 @@ angular.module('angular.mt.agenda', [])
                 $scope.now = moment.utc();
                 $scope.base = moment.utc({y:$scope.now.year(), M:$scope.now.month(), d:1});
 
-                $scope.predicate = 'name';
+                $scope.predicate = 'data.name';
                 $scope.reverse = false;
 
-                $scope.select = function(item){
-                    if($scope.selected!==null){
-                        $scope.selected.selected = false;
+                $scope.selectLine = function(item){
+                    if($scope.selectedLine!==null){
+                        $scope.selectedLine.selected = false;
                     }
-                    if($scope.selected !== item){
-                        $scope.selected = item;
-                        $scope.selected.selected = true;
+                    if($scope.selectedLine !== item){
+                        $scope.selectedLine = item;
+                        $scope.selectedLine.selected = true;
                     }
                     else{
-                        $scope.selected = null;
+                        $scope.selectedLine = null;
                     }
                 };
 
@@ -71,6 +71,10 @@ angular.module('angular.mt.agenda', [])
                 };
 
                 $scope.$watch('base | json', function(){
+                    updateTable($scope.base);
+                });
+
+                $scope.$watch('ngModel', function(){
                     updateTable($scope.base);
                 });
 
@@ -108,8 +112,12 @@ angular.module('angular.mt.agenda', [])
                         firstMonthDay: firstMonthDay,
                         lastMonthDay: lastMonthDay,
                         days: [],
-                        items: $scope.ngModel
+                        items: []
                     };
+
+                    for(var i=0; i<$scope.ngModel.length; i++){
+                        $scope.calendar.items.push({data: $scope.ngModel[i], days: []});
+                    }
 
                     for(var i=moment.utc(firstDay); i.isBefore(lastDay); i.add(1,'d')) { // For each day
                         var day = {
@@ -120,11 +128,16 @@ angular.module('angular.mt.agenda', [])
                         day.class['is-we'] = (i.day()===6 || i.day()===0);
                         day.class['is-today'] = (i.isSame($scope.now, 'd'));
                         day.class['is-other-month'] = (i.isBefore(firstMonthDay) || i.isAfter(lastMonthDay));
-                        day.class['selectable'] = (i.isBefore(firstMonthDay) || i.isAfter(lastMonthDay));
                         $scope.calendar.days.push(day);
+                        for(var j=0; j<$scope.calendar.items.length; j++){
+                            var newDayData = { date: day.date, class: angular.copy(day.class)};
+                            $scope.calendar.items[j].days.push(newDayData);
+                        }
                     }
 
-
+                    if(angular.isFunction($scope.config.onTableUpdate)){
+                        $scope.config.onTableUpdate($scope.calendar);
+                    }
                 };
 
                 updateTable($scope.base);
