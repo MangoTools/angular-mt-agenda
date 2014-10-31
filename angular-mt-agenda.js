@@ -81,10 +81,10 @@ angular.module('angular.mt.agenda', [])
                 }
 
                 var selectedDay = null;
-                $scope.selectDay = function(item, day, $index){
+                $scope.selectDay = function(item, day){
 
                     day.class.selected = !day.class.selected;
-                    if(angular.isFunction($scope.selectLine)) $scope.config.onSelectDay(item, day, $index); // Can be overwrite outside
+                    if(angular.isFunction($scope.selectLine)) $scope.config.onSelectDay(item, day); // Can be overwrite outside
 
                     if(day.class.selected){
                         if(selectedDay!==null && selectedDay !== day){
@@ -111,6 +111,12 @@ angular.module('angular.mt.agenda', [])
 
                 $scope.selectLine = function(item){
                     if($scope.selectedItem!==null){
+                        // First deselect day if any
+                        if(selectedDay)
+                        {
+                            selectedDay.class.selected = false;
+                            if(angular.isFunction($scope.selectLine)) $scope.config.onSelectDay(item, selectedDay); // Can be overwrite outside
+                        }
                         $scope.selectedItem.selected = false;
                     }
                     if($scope.selectedItem !== item.data){
