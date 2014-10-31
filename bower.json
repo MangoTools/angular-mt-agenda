@@ -1,7 +1,7 @@
 {
   "name": "angular-mt-agenda",
   "main": "angular-mt-agenda.js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "homepage": "https://github.com/MangoTools/angular-mt-agenda",
   "authors": [
     "adidoo <adrien@mango.tools>"

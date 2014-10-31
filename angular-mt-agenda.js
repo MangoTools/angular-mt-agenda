@@ -7,7 +7,7 @@ angular.module('angular.mt.agenda', [])
             scope: {
                 ngModel:'=',
                 config: '=',
-                selectedLine: '='
+                selectedItem: '='
             },
             replace: true,
             template:
@@ -28,9 +28,9 @@ angular.module('angular.mt.agenda', [])
             '           </thead>' +
             '           <tbody>' +
             '               <tr ng-repeat="item in calendar.items | orderBy:predicate:reverse" class="mt-item" ng-class="{selected: item.data.selected}">' +
-            '                   <td class="mt-item-img" ng-click="selectLine(item.data)"><img ng-src="{{item.data.imgUrl}}"></td>' +
-            '                   <td class="mt-item-name" ng-click="selectLine(item.data)"">{{item.data.name}}</td>' +
-            '                   <td ng-repeat="day in item.days" class="mt-item-day" ng-class="day.class"> </td>' +
+            '                   <td class="mt-item-img" ng-click="selectLine(item)"><img ng-src="{{item.data.imgUrl}}"></td>' +
+            '                   <td class="mt-item-name" ng-click="selectLine(item)"">{{item.data.name}}</td>' +
+            '                   <td ng-repeat="day in item.days" class="mt-item-day" ng-class="day.class" ng-click="selectDay(item, day, $index)"> </td>' +
             '               </tr>' +
             '           </tbody>' +
             '       </table>' +
@@ -46,25 +46,14 @@ angular.module('angular.mt.agenda', [])
                 $scope.config.firstDayOfWeek = $scope.config.firstDayOfWeek || 6;
                 $scope.config.canGoBeforeToday = $scope.config.canGoBeforeToday || false;
                 $scope.config.minHeight = $scope.config.minHeight || '300px';
+                $scope.config.onSelectDay = $scope.config.onSelectDay || null;                  // Call at the end of a day click
+                $scope.config.onSelectItem = $scope.config.onSelectItem || null;                // Call at the end of an item click
 
                 $scope.now = moment.utc();
                 $scope.base = moment.utc({y:$scope.now.year(), M:$scope.now.month(), d:1});
 
                 $scope.predicate = 'data.name';
                 $scope.reverse = false;
-
-                $scope.selectLine = function(item){
-                    if($scope.selectedLine!==null){
-                        $scope.selectedLine.selected = false;
-                    }
-                    if($scope.selectedLine !== item){
-                        $scope.selectedLine = item;
-                        $scope.selectedLine.selected = true;
-                    }
-                    else{
-                        $scope.selectedLine = null;
-                    }
-                };
 
                 $scope.goToUrl = function(url){
                     $location.path(url);
@@ -90,6 +79,50 @@ angular.module('angular.mt.agenda', [])
                     event.stopPropagation();
                     $scope.base.add(1, 'months');
                 }
+
+                var selectedDay = null;
+                $scope.selectDay = function(item, day, $index){
+
+                    day.class.selected = !day.class.selected;
+                    if(angular.isFunction($scope.selectLine)) $scope.config.onSelectDay(item, day, $index); // Can be overwrite outside
+
+                    if(day.class.selected){
+                        if(selectedDay!==null && selectedDay !== day){
+                            selectedDay.class.selected = false;
+                        }
+                        selectedDay = day;
+
+                        // Also select line if not selected
+                        if($scope.selectedItem !== item.data) {
+                            if ($scope.selectedItem !== null) {
+                                $scope.selectedItem.selected = false;
+                            }
+                            $scope.selectedItem = item.data;
+                            $scope.selectedItem.selected = true;
+                            if(angular.isFunction($scope.config.onSelectItem)) $scope.config.onSelectItem(item);
+                        }
+                    }
+                    else{
+                        selectedDay = null;
+                    }
+
+
+                }
+
+                $scope.selectLine = function(item){
+                    if($scope.selectedItem!==null){
+                        $scope.selectedItem.selected = false;
+                    }
+                    if($scope.selectedItem !== item.data){
+                        $scope.selectedItem = item.data;
+                        $scope.selectedItem.selected = true;
+                    }
+                    else{
+                        $scope.selectedItem = null;
+                    }
+
+                    if(angular.isFunction($scope.config.onSelectItem)) $scope.config.onSelectItem(item);
+                };
 
                 var updateTable = function(base) {
 
