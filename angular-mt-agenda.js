@@ -103,6 +103,9 @@ angular.module('angular.mt.agenda', [])
                         }
                     }
                     else{
+                        if(selectedDay){
+                            selectedDay.class.selected = false;
+                        }
                         selectedDay = null;
                     }
 
