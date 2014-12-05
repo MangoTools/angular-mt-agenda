@@ -63,6 +63,10 @@ angular.module('angular.mt.agenda', [])
                     updateTable($scope.base);
                 });
 
+                $rootScope.$on('agenda:update', function(event){
+                    updateTable($scope.base);
+                });
+
                 $scope.$watch('ngModel', function(){
                     updateTable($scope.base);
                 });
