@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angular.mt.agenda', [])
-    .directive('mtAgenda', [ function() {
+    .directive('mtAgenda', [ '$rootScope', function($rootScope) {
         return {
             restrict: 'AE',
             scope: {
